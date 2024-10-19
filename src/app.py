@@ -1,3 +1,4 @@
+from flask import Flask, request, render_template
 import os
 import regex as re
 import streamlit as st
@@ -5,6 +6,8 @@ from pickle import load
 from nltk import download
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+
+app = Flask(__name__)
 
 # Load the model and vectorizer
 model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../models/svm_classifier_C-1_deg-1_gam-scale_ker-linear_42.sav")
@@ -72,3 +75,9 @@ if st.button("Predict"):
         st.success(f"Prediction: {pred_class}")
     else:
         st.error("Please enter a review to make a prediction.")
+
+if __name__ == "__main__":
+    # Use the port provided by Render, or default to 5000
+    port = int(os.environ.get("PORT", 5000))
+    # Set host to 0.0.0.0 to be accessible externally
+    app.run(host="0.0.0.0", port=port, debug=True)
