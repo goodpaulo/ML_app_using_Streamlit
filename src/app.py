@@ -3,12 +3,10 @@ import os
 import regex as re
 import streamlit as st
 from pickle import load
+import nltk
 from nltk import download
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-
-download("wordnet")
-download("stopwords")
 
 app = Flask(__name__)
 
@@ -25,9 +23,22 @@ class_dict = {
 }
 
 # Ensure wordnet and stopwords are downloaded once
+#download("wordnet")
+#download("stopwords")
 
-stop_words = stopwords.words("english")
-stop_words = stopwords.words("english")
+try:
+    stop_words = stopwords.words('english')
+except LookupError:
+    nltk.download('stopwords')
+    stop_words = stopwords.words('english')
+
+try:
+    nltk.data.find('corpora/wordnet.zip')
+except LookupError:
+    nltk.download('wordnet')
+
+#stop_words = stopwords.words("english")
+#stop_words = stopwords.words("english")
 lemmatizer = WordNetLemmatizer()
 
 def preprocess_text(text):
