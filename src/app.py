@@ -7,6 +7,9 @@ from nltk import download
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
+download("wordnet")
+download("stopwords")
+
 app = Flask(__name__)
 
 # Load the model and vectorizer
@@ -22,12 +25,6 @@ class_dict = {
 }
 
 # Ensure wordnet and stopwords are downloaded once
-#download("wordnet")
-#download("stopwords")
-if os.environ.get("FLASK_ENV") != "production":
-    # Only download in non-production environments
-    download('stopwords')
-    download('wordnet')
 
 stop_words = stopwords.words("english")
 stop_words = stopwords.words("english")
