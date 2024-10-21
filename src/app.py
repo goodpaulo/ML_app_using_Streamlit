@@ -22,8 +22,14 @@ class_dict = {
 }
 
 # Ensure wordnet and stopwords are downloaded once
-download("wordnet")
-download("stopwords")
+#download("wordnet")
+#download("stopwords")
+if os.environ.get("FLASK_ENV") != "production":
+    # Only download in non-production environments
+    download('stopwords')
+    download('wordnet')
+
+stop_words = stopwords.words("english")
 stop_words = stopwords.words("english")
 lemmatizer = WordNetLemmatizer()
 
