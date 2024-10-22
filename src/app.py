@@ -5,6 +5,7 @@ from pickle import load
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+#url for deployed website https://ml-app-using-streamlit.onrender.com/
 
 # Load the model and vectorizer
 model_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../models/svm_classifier_C-1_deg-1_gam-scale_ker-linear_42.sav")
